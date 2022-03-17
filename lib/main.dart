@@ -1,4 +1,4 @@
-import 'package:design_patterns_in_dart_with_flutter/creational/singleton/user_settings.dart';
+import 'package:design_patterns_in_dart_with_flutter/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,6 +30,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final buttonStyle = ElevatedButton.styleFrom(
+    textStyle: const TextStyle(
+      fontSize: 20,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,23 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Dark Mode:',
-                    style: Theme.of(context).textTheme.headline4),
-                Switch(
-                  value: UserSettings.instance.darkMode,
-                  onChanged: (bool? newValue) => {
-                    setState(() {
-                      UserSettings.instance.darkMode = newValue!;
-                    })
-                  },
-                ),
-              ],
+          children: [
+            ElevatedButton(
+              style: buttonStyle,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const SettingsScreen();
+                  }),
+                );
+              },
+              child: const Text('Creational / Singleton'),
             ),
           ],
         ),
