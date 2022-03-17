@@ -1,3 +1,4 @@
+import 'package:design_patterns_in_dart_with_flutter/creational/singleton/user_settings.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(
-          title: 'Discover Design Patterns with Dart in Flutter'),
+      home: const MyHomePage(title: 'Design Patterns in Dart with Flutter'),
     );
   }
 }
@@ -30,38 +30,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Dark Mode:',
+                    style: Theme.of(context).textTheme.headline4),
+                Switch(
+                  value: UserSettings.instance.darkMode,
+                  onChanged: (bool? newValue) => {
+                    setState(() {
+                      UserSettings.instance.darkMode = newValue!;
+                    })
+                  },
+                ),
+              ],
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
