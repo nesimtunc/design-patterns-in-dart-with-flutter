@@ -2,7 +2,9 @@
 
 Let's discover how to implement popular design patterns in Dart with Flutter.
 
-So far: 
+So far:
+
 - Creational
   - Singleton
   - Builder
+  - Factory
